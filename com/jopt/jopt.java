@@ -7,14 +7,18 @@ import joptsimple.OptionSet;
 class LongOptionTest{
 	public static void main(String[] args){
 		System.out.println("Hello");
-		new LongOptionTest().acceptsLongOptions();
-	}
-
-	public void acceptsLongOptions(){
 		OptionParser parser = new OptionParser();
-		parser.accepts("flag");
+		parser.accepts("add").withRequiredArg().ofType(String.class).required();
+		parser.accepts("path").withRequiredArg().ofType(String.class);
 
-		OptionSet options = parser.parse("--flag");
+
+		OptionSet options = parser.parse(args);
+		String name = (String)options.valueOf("add");
+		String age = (String)options.valueOf("path");
+		System.out.println("add" + name);
+		System.out.println("path: " + age);
+		
+
 
 	}
 }
